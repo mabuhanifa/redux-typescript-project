@@ -18,7 +18,7 @@ function App() {
   }
   return (
     <div className='p-10 grid grid-cols-3'>
-      <div className='col-span-2 grid grid-cols-3 gap-2'>
+      <div className='col-span-2 grid grid-cols-3 gap-3 p-2'>
         {status === "pending" && <h1>loading.....</h1>}
         {products && products.map(product => (
           <div key={product.id} className="border border-gray-300 p-3 rounded shadow-lg">
@@ -33,7 +33,7 @@ function App() {
         ))
         }
       </div>
-      <div>
+      <div className='p-2'>
         <Cart />
       </div>
     </div>
