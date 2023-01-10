@@ -8,7 +8,7 @@ import { AppDispatch } from './redux/store/store';
 
 function App() {
   const { store: { products, status } } = useAppSelector((state) => state);
-  const dispatch = useDispatch<AppDispatch>()
+  const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
     dispatch(fetchProducts())
   }, [dispatch]);
