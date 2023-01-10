@@ -1,23 +1,38 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit/dist/createAsyncThunk";
 
+type ProductType = {
+    id: number;
+    title?: string;
+    description?: string;
+    price?: number;
+    discountPercentage?: number;
+    rating?: number;
+    stock?: number;
+    brand?: string;
+    category?: string;
+    thumbnail?: string;
+    images?: string[];
+    quantity?: number;
+}
+
 interface MainState {
-    products: [];
-    cart: [];
-    loading: 'idle' | 'pending' | 'succeeded' | 'failed';
+    products: ProductType[];
+    cart: ProductType[];
+    status: 'idle' | 'pending' | 'succeeded' | 'failed';
 }
 
 
 const initialState = {
     products: [],
     cart: [],
-    loading: 'idle',
-}
+    status: 'idle',
+} as MainState;
 
 const fetchProducts = createAsyncThunk(
     'store/products',
     async () => {
-        const response = await fetch(``)
+        const response = await fetch(`https://dummyjson.com/products`)
         return (await response.json())
     }
 )
@@ -25,15 +40,29 @@ const fetchProducts = createAsyncThunk(
 const storeSlice = createSlice({
     name: 'store',
     initialState,
-    reducers: {},
+    reducers: {
+        addToCart: (state, action) => {
+            state.cart = [...state.cart, action.payload]
+        }
+
+    },
     extraReducers: (builder) => {
+        builder.addCase(fetchProducts.pending, (state) => {
+            state.status = 'pending'
+        })
+        builder.addCase(fetchProducts.fulfilled, (state, action) => {
+            state.status = 'succeeded';
+            state.products = action.payload;
+        })
+        builder.addCase(fetchProducts.rejected, (state) => {
+            state.products = [];
+            state.status = 'failed'
+        })
 
     }
 })
 
 
+export const { addToCart } = storeSlice.actions;
 
-
-
-
-export default storeSlice;
+export default storeSlice.reducer;
