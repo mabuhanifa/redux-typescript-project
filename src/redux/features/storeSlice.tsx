@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type ProductType = {
     id: number;
@@ -28,7 +28,7 @@ const initialState = {
     status: 'idle',
 } as MainState;
 
-const fetchProducts = createAsyncThunk(
+export const fetchProducts = createAsyncThunk(
     'store/products',
     async () => {
         const response = await fetch(`https://dummyjson.com/products`)
@@ -42,7 +42,7 @@ const storeSlice = createSlice({
     initialState,
 
     reducers: {
-        addToCart: (state, action) => {
+        addToCart: (state, action: PayloadAction<ProductType>) => {
             state.cart = [...state.cart, action.payload]
         }
 
