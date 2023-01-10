@@ -5,11 +5,8 @@ import { useAppSelector } from './hooks/useTypedSelectors';
 import { addToCart, fetchProducts, ProductType } from './redux/features/storeSlice';
 import { AppDispatch } from './redux/store/store';
 
-
-
 function App() {
-  const { store: { products, cart, status } } = useAppSelector((state) => state);
-  console.log(cart)
+  const { store: { products, status } } = useAppSelector((state) => state);
   const dispatch = useDispatch<AppDispatch>()
   useEffect(() => {
     dispatch(fetchProducts())
@@ -19,15 +16,17 @@ function App() {
     dispatch(addToCart(product))
   }
   return (
-    <div >
-      {status === "pending" && <h1>loading.....</h1>}
-      {products && products.map(product => (
-        <div key={product.id}>
-          <h2>{product.title}</h2>
-          <button onClick={() => fnAddToCart(product)}>Add to Cart</button>
-        </div>
-      ))
-      }
+    <div>
+      <div >
+        {status === "pending" && <h1>loading.....</h1>}
+        {products && products.map(product => (
+          <div key={product.id}>
+            <h2>{product.title}</h2>
+            <button onClick={() => fnAddToCart(product)}>Add to Cart</button>
+          </div>
+        ))
+        }
+      </div>
     </div>
   );
 }
