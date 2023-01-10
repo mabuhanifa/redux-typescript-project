@@ -8,7 +8,7 @@ import { AppDispatch } from './redux/store/store';
 
 
 function App() {
-  const { store: { products, cart } } = useAppSelector((state) => state);
+  const { store: { products, cart, status } } = useAppSelector((state) => state);
   console.log(cart)
   const dispatch = useDispatch<AppDispatch>()
   useEffect(() => {
@@ -20,6 +20,7 @@ function App() {
   }
   return (
     <div >
+      {status === "pending" && <h1>loading.....</h1>}
       {products && products.map(product => (
         <div key={product.id}>
           <h2>{product.title}</h2>
