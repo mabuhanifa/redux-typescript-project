@@ -50,7 +50,10 @@ const storeSlice = createSlice({
             state.cart = state.cart.filter((c) => c.id !== action.payload.id)
         },
         changeQuantity: (state, action: PayloadAction<ProductType>) => {
-            state.cart = state.cart.filter((c) => c.id == action.payload.id ? c.quantity = action.payload.quantity : c.quantity);
+            state.cart.filter((cart) => cart.id === action.payload.id ? cart.quantity = action.payload.quantity : cart.quantity);
+            if (action.payload.quantity === 0) {
+                state.cart = state.cart.filter((c) => c.id !== action.payload.id)
+            }
         }
 
     },

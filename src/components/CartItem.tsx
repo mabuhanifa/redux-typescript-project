@@ -4,14 +4,12 @@ import { AppDispatch } from '../redux/store/store';
 type PropsType = {
     cart: ProductType
 }
-const defaultProps = {
-    quantity: 1,
-};
+
 
 export default function CartItem(props: PropsType) {
     const { cart } = props;
     const dispatch = useDispatch<AppDispatch>();
-    const changeQty = (id: number, qty: number = 1) => {
+    const changeQty = (id: number, qty: number) => {
         console.log(id, qty);
         dispatch(changeQuantity({
             id: id,
@@ -31,12 +29,12 @@ export default function CartItem(props: PropsType) {
             </div>
             <div className="flex flex-col items-center justify-center gap-3 font-bold text-white text-xl">
                 <button className="rounded px-2.5 bg-green-500"
-                    onClick={() => changeQty(cart.id, cart.quantity && cart.quantity + 1)}
+                    onClick={() => changeQty(cart.id, cart.quantity ? cart.quantity + 1 : 2)}
 
                 >+</button>
                 <button className="rounded px-3 bg-red-500 "
 
-                    onClick={() => changeQty(cart.id, cart.quantity && cart.quantity - 1)}
+                    onClick={() => changeQty(cart.id, cart.quantity ? cart.quantity - 1 : 0)}
                 >-</button>
             </div>
             <div className="flex items-center justify-center">
@@ -47,5 +45,3 @@ export default function CartItem(props: PropsType) {
         </div>
     )
 }
-
-CartItem.defaultProps = defaultProps;
