@@ -1,13 +1,12 @@
 import { useDispatch } from 'react-redux';
 import { changeQuantity, ProductType, removeFromCart } from '../redux/features/storeSlice';
 import { AppDispatch } from '../redux/store/store';
+
 type PropsType = {
     cart: ProductType
 }
 
-
-export default function CartItem(props: PropsType) {
-    const { cart } = props;
+export default function CartItem({ cart }: PropsType) {
     const dispatch = useDispatch<AppDispatch>();
     const changeQty = (id: number, qty: number) => {
         dispatch(changeQuantity({
@@ -17,10 +16,6 @@ export default function CartItem(props: PropsType) {
     }
     return (
         <div>
-            <div className='text-center'>
-
-
-            </div>
             <div className="p-2 border border-gray-300 gap-3 grid grid-cols-5" key={cart.id}>
                 <div className="flex justify-center items-center">
                     <img src={cart.thumbnail} alt="" className="h-14 w-20 object-cover" />
