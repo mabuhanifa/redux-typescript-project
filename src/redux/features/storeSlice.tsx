@@ -1,5 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { createAsyncThunk } from "@reduxjs/toolkit/dist/createAsyncThunk";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 type ProductType = {
     id: number;
@@ -39,25 +38,28 @@ const fetchProducts = createAsyncThunk(
 
 const storeSlice = createSlice({
     name: 'store',
+
     initialState,
+
     reducers: {
         addToCart: (state, action) => {
             state.cart = [...state.cart, action.payload]
         }
 
     },
+
     extraReducers: (builder) => {
         builder.addCase(fetchProducts.pending, (state) => {
             state.status = 'pending'
-        })
+        });
         builder.addCase(fetchProducts.fulfilled, (state, action) => {
             state.status = 'succeeded';
             state.products = action.payload;
-        })
+        });
         builder.addCase(fetchProducts.rejected, (state) => {
             state.products = [];
             state.status = 'failed'
-        })
+        });
 
     }
 })
