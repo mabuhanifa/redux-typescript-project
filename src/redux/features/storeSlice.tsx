@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type ProductType = {
+export type ProductType = {
     id: number;
     title?: string;
     description?: string;
@@ -15,7 +15,7 @@ type ProductType = {
     quantity?: number;
 }
 
-interface MainState {
+export interface MainState {
     products: ProductType[];
     cart: ProductType[];
     status: 'idle' | 'pending' | 'succeeded' | 'failed';
@@ -31,8 +31,9 @@ const initialState = {
 export const fetchProducts = createAsyncThunk(
     'store/products',
     async () => {
-        const response = await fetch(`https://dummyjson.com/products`)
-        return (await response.json())
+        const response = await fetch(`https://dummyjson.com/products`);
+        const data = await response.json();
+        return data.products;
     }
 )
 
