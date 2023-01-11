@@ -1,14 +1,12 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import './App.css';
 import Cart from './components/Cart';
-import { useAppSelector } from './hooks/useTypedSelectors';
+import { useAppDispatch, useAppSelector } from './hooks/useTypedSelectors';
 import { addToCart, fetchProducts, removeFromCart } from './redux/features/storeSlice';
-import { AppDispatch } from './redux/store/store';
 
 function App() {
   const { store: { products, cart, status } } = useAppSelector((state) => state);
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(fetchProducts())
   }, [dispatch]);
@@ -21,13 +19,16 @@ function App() {
 
         {products && products.map(product => (
 
-          <div key={product.id} className="border border-gray-300 p-3 rounded shadow-lg">
+          <div key={product.id} className="border border-gray-300 p-3 rounded shadow-lg relative h-[360px]">
 
             <img src={product.thumbnail} alt="" className='h-32 w-60 object-cover' />
 
-            <h2>{product.title}</h2>
-
-            <div className='flex justify-center'>
+            <h2 className='text-lg font-bold my-3'>{product.title}</h2>
+            <p>
+              {product.description}
+            </p>
+            <h4 className='font-bold'>Price : {product.price}</h4>
+            <div className='flex justify-center absolute bottom-2 left-2 right-2'>
 
               {
                 cart.some((c) => c.id === product.id) ?
