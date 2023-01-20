@@ -16,7 +16,7 @@ export default function CartItem({ cart }: PropsType) {
     }
     return (
         <div>
-            <div className="p-2 border border-gray-300 gap-3 grid grid-cols-5" key={cart.id}>
+            <div className="p-2 border border-gray-300 gap-3 md:grid md:grid-cols-5" key={cart.id}>
                 <div className="flex justify-center items-center">
                     <img src={cart.thumbnail} alt="" className="h-14 w-20 object-cover" />
                 </div>
@@ -24,9 +24,9 @@ export default function CartItem({ cart }: PropsType) {
                     <h1>{cart.title}</h1>
                     <h2>Price per unit : $ {cart.price}</h2>
                     <h2>Selected Quantity : {cart.quantity ? cart.quantity : 1}</h2>
-                    <h2>Total Price : $ {cart.quantity ? cart.quantity * cart.price! : 1 * cart.price!}</h2>
+                    <h2 >Total Price : $ <span className='font-bold'>{cart.quantity ? cart.quantity * cart.price! : 1 * cart.price!}</span></h2>
                 </div>
-                <div className="flex flex-col items-center justify-center gap-3 font-bold text-white text-xl">
+                <div className="flex flex-col items-center justify-center gap-3 font-bold text-white text-xl my-2">
                     <button className="rounded px-2.5 bg-green-500"
                         onClick={() => changeQty(cart.id, cart.quantity ? cart.quantity + 1 : 2)}
 

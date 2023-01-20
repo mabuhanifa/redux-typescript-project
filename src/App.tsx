@@ -12,14 +12,14 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className='p-5 grid grid-cols-2 sm:grid-cols-3'>
-      <div className='col-span-1 sm:col-span-2 grid sm:grid-cols-3 gap-3 p-2'>
+    <div className='p-5 grid grid-cols-2 md:grid-cols-3'>
+      <div className='col-span-1 md:col-span-2 grid md:grid-cols-3 gap-3 p-2'>
 
         {status === "pending" && <h1>loading.....</h1>}
 
         {products && products.map(product => (
 
-          <div key={product.id} className="border border-gray-300 p-3 rounded shadow-lg relative h-[360px]">
+          <div key={product.id} className="border border-gray-300 p-3 rounded shadow-lg  relative h-[360px]">
 
             <img src={product.thumbnail} alt="" className='h-32 w-60 object-cover' />
 
@@ -50,7 +50,7 @@ function App() {
         ))
         }
       </div>
-      <div className='p-2 col-span-1 fixed top-0 right-0 w-[300px] sm:static sm:w-full'>
+      <div className='p-2 col-span-1 '>
         <Cart />
       </div>
     </div>
