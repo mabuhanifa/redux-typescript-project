@@ -12,8 +12,8 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className='p-10 grid grid-cols-3'>
-      <div className='col-span-2 grid grid-cols-3 gap-3 p-2'>
+    <div className='p-5 grid grid-cols-2 sm:grid-cols-3'>
+      <div className='col-span-1 sm:col-span-2 grid sm:grid-cols-3 gap-3 p-2'>
 
         {status === "pending" && <h1>loading.....</h1>}
 
@@ -50,7 +50,7 @@ function App() {
         ))
         }
       </div>
-      <div className='p-2'>
+      <div className='p-2 col-span-1 fixed top-0 right-0 w-[300px] sm:static sm:w-full'>
         <Cart />
       </div>
     </div>
